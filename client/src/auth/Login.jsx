@@ -50,9 +50,13 @@ export const Login = () => {
                   <button className='btn btn-danger fs-4' data-bs-dismiss="modal">Ingresar</button>
                 </div>
                 </form>
-                <div className="row mt-2">
-                  <div className="col-6">
-                  <button className='btn btn-danger'>Registarme</button>
+                <div className="row mt-4">
+                  <div className="col mt-1 fs-5 fw-bold">
+                    ¿No tienes cuenta?
+                  </div>
+                  <div className="col">
+
+                  <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target="#registerModal">Registarme</button>
                   </div>
                 </div>
               </div>
