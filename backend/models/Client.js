@@ -23,7 +23,6 @@ const ClientSchema = Schema({
     },
     img: {
         type: String,
-        required: true
     },
     pago: {
         type: Boolean,

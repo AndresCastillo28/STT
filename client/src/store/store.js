@@ -6,6 +6,7 @@ export const store = configureStore({
         auth:     authSlice.reducer,
         trainers: trainersSlice.reducer,
         appointments: appointmentsSlice.reducer,
+        // payments: paymentsSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false

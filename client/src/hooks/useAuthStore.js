@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sttApi } from '../api';
-import { clearErrorMessage, onChecking, onLogoutAppointment, onLogin, onLogout } from '../store';
+import { clearErrorMessage, onChecking, onLogoutAppointment, onLogin, onLogout, onUpdatePay } from '../store';
 
 export const useAuthStore = () => {
 
@@ -20,6 +20,33 @@ export const useAuthStore = () => {
             dispatch(onLogout('Credenciales incorrectas'));
             setTimeout(() => {
                 dispatch(clearErrorMessage());
+            }, 10);
+        }
+    }
+    const startUpdatePay = async () => {
+
+        try {
+            await sttApi.post('/clients/pay');
+            const updateUser = { ...user, pago: true }
+            dispatch(onUpdatePay(updateUser));
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const startRegister = async({ name, lastName, cedula, email, password }) => {
+        console.log({ name, lastName, cedula, email, password })
+        dispatch( onChecking() );
+        try {
+            const { data } = await sttApi.post('/auth/register',{ name, lastName, cedula, email, password });
+            console.log(data)
+            localStorage.setItem('token', data.token );
+            localStorage.setItem('token-init-date', new Date().getTime() );
+            dispatch( onLogin({ name: data.name, uid: data.uid, pago: false, trainer: null, rol: 'client' }) );
+            
+        } catch (error) {
+            dispatch( onLogout( error.response.data?.msg || '--' ) );
+            setTimeout(() => {
+                dispatch( clearErrorMessage() );
             }, 10);
         }
     }
@@ -55,7 +82,9 @@ export const useAuthStore = () => {
 
         //Funciones
         startLogin,
+        startRegister,
         checkAuthToken,
         startLogout,
+        startUpdatePay
     }
 }

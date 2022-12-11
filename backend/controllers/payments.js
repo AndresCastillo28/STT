@@ -1,12 +1,34 @@
-const payment = () => {
-    const data = {
-        test: false,
-        language: "es",
-        command: "GET_PAYMENT_METHODS",
-        merchant: {
-            apiLogin: "pRRXKOl8ikMmt9u",
-            apiKey: "4Vj8eK4rloUd272L48hsrarnUA"
-        }
+const Stripe = require('stripe');
+
+const stripe = new Stripe(process.env.SECRET_STRIPE)
+
+const payment = async(req, res) => {
+
+    try {
+        
+        const { id, amount } = req.body;
+    
+        const payment = await stripe.paymentIntents.create({
+            amount,
+            currency: "USD",
+            description: "Mensualidad",
+            payment_method: id,
+            confirm: true
+        }); 
+    
+        return res.json({
+            ok: true,
+            msg: 'Pago exitoso'
+        })
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: error.raw.message
+        })
     }
-    const response = await
+
+}
+
+module.exports = {
+    payment
 }

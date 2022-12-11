@@ -28,6 +28,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/clients', require('./routes/client.routes'));
+app.use('/api/payments', require('./routes/payments.routes'));
+
 
 const PORT = 4000 || process.env.PORT
 

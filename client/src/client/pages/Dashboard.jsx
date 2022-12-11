@@ -8,7 +8,10 @@ export const Dashboard = () => {
 
   if(user.pago === false) {
     return (
-      <NoPayments/>
+      <>
+        <Navbar />
+        <NoPayments/>
+      </>
     )
   }
   return (

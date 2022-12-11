@@ -47,9 +47,10 @@ export const AppRouter = () => {
         }else if (user.rol === 'client'){
             return ( 
                 <Routes>
-                    <Route path='/*' element={ <Dashboard /> }/>
+                    <Route path='/' element={ <Dashboard /> }/>
                     <Route path='/doctors' element={ <Doctors /> }/>
                     <Route path='/trainers' element={ <Trainers /> }/>
+                    <Route path='/*' element={ <Navigate to="/" /> } />
 
                 </Routes>
              )

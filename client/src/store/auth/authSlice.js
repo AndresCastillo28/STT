@@ -13,10 +13,21 @@ export const authSlice = createSlice({
             state.user   = {};
             state.errorMessage = undefined;
         },
+        onUpdatePay: (state, { payload }) => {
+            state.status = 'authenticated'
+            state.user = payload,
+            state.errorMessage = undefined
+        },
+
         onLogin: ( state, { payload } ) => {
             state.status = 'authenticated';
             state.user = payload;
             state.errorMessage = undefined;
+        },
+        onUpdateUser: ( state, { payload } ) => {
+            state.status = 'authenticated';
+            state.user = payload;
+            state.errorMessage = undefined
         },
         onLogout: ( state, { payload } ) => {
             state.status = 'not-authenticated';
@@ -31,4 +42,4 @@ export const authSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onChecking, onLogin, onLogout, clearErrorMessage } = authSlice.actions;
+export const { onChecking, onLogin, onLogout, clearErrorMessage, onUpdatePay } = authSlice.actions;

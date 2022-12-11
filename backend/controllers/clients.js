@@ -126,10 +126,31 @@ const updateTrainer = async (req, res) => {
     }
 }
 
+const updatePay = async (req, res) => {
+    try {
+        const user = req.uid
+
+        const pay = {
+            pago: true
+        }
+
+        await Client.findByIdAndUpdate(user, pay, { new: true } )
+
+        return res.json({
+            ok: true,
+            msg: 'Pago registrado'
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+} 
+
 module.exports = {
     getScheduleDate,
     getTrainers,
     updateAppointment,
     updateTrainer,
-    getTrainer
+    getTrainer,
+    updatePay
 }

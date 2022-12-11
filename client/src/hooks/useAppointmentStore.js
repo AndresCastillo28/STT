@@ -23,7 +23,6 @@ export const useAppointmentStore = () => {
             const { data } = await sttApi.put(`/clients/${_id}`);
             dispatch( onUpdateAppointment({ ...data.updatedAppointment }) )
             Swal.fire("Exitoso", 'Cita guardada', "success");
-            console.log(data)
         } catch (error) {
            console.log(error) 
         }

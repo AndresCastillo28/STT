@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuthStore, useForm } from '../hooks'
+import Swal from 'sweetalert2';
 
 const registerFormFields = {
   registerName: '',
@@ -17,7 +18,7 @@ export const Register = () => {
 
   const registerSubmit = (event) => {
     event.preventDefault();
-    startRegister({ name: registerName, email: registerEmail, password: registerPassword });
+    startRegister({ name: registerName, lastName: registerLastName, cedula: registerCedula, email: registerEmail, password: registerPassword });
   };
   useEffect(() => {
     if (errorMessage !== undefined) {
@@ -35,35 +36,35 @@ export const Register = () => {
           </div>
           <div class="modal-body">
             <div className="container">
+              <form onSubmit={ registerSubmit }>
               <div className="row">
-                <form onSubmit={ registerSubmit }>
+        
                 <div className="col-6">
-                  <label htmlFor='nombre' className="fs-4">Nombre</label>
-                  <input type="text" id='nombre' className='form-control' name='registerName' value={ registerName } onChange={ onRegisterInputChange } />
+                  <label htmlFor='registerNombre' className="fs-4">Nombre</label>
+                  <input type="text" id='registerNombre' className='form-control' name='registerName' value={ registerName } onChange={ onRegisterInputChange } />
                 </div>
                 <div className="col-6 mt-2">
-                  <label htmlFor='apellido' className="fs-4">Apellido</label>
-                  <input type="text" id='apellido' className='form-control' name='registerLastName' value={ registerLastName } onChange={ onRegisterInputChange }/>
+                  <label htmlFor='registerApellido' className="fs-4">Apellido</label>
+                  <input type="text" id='registerApellido' className='form-control' name='registerLastName' value={ registerLastName } onChange={ onRegisterInputChange }/>
                 </div>
                 <div className="col-6 mt-2">
-                  <label htmlFor='email' className="fs-4">Email</label>
-                  <input type="text" id='email' className='form-control' name='registerEmail' value={ registerEmail } onChange={ onRegisterInputChange }/>
+                  <label htmlFor='registerCorreo' className="fs-4">Email</label>
+                  <input type="text" id='registerCorreo' className='form-control' name='registerEmail' value={ registerEmail } onChange={ onRegisterInputChange }/>
                 </div>
                 <div className="col-6 mt-2">
-                  <label htmlFor='cedula' className="fs-4" name='registerCedula' value={ registerCedula } onChange={ onRegisterInputChange } >Cedula</label>
-                  <input type="text" id='cedula' className='form-control' />
+                  <label htmlFor='registerId' className="fs-4" >Cedula</label>
+                  <input type="number" id='registerId' className='form-control' name='registerCedula' value={ registerCedula } onChange={ onRegisterInputChange } />
                 </div>
                 <div className="col-12 mt-2">
-                  <label htmlFor='password' className="fs-4" name='registerPassword' value={ registerPassword } onChange={ onInputChange }>Contraseña</label>
-                  <input type="text" id='password' className='form-control' />
+                  <label htmlFor='registerContrasena' className="fs-4" >Contraseña</label>
+                  <input type="password" id='registerContrasena' className='form-control' name='registerPassword' value={ registerPassword } onChange={ onRegisterInputChange }/>
                 </div>
-                <div className="col-12 btn btn-danger mt-4 fs-4">
-                  <div className="col">
-                    Registrarme
-                  </div>
-                </div>
-                </form>
+                
               </div>
+                <div className="row mt-4">
+                    <button className='btn btn-danger' data-bs-dismiss="modal">Registrarme</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

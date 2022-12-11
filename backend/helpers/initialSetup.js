@@ -10,7 +10,7 @@ const createRoles = async () => {
 
         const values = await Promise.all([
             new Role({ name: 'client' }).save(),
-            new Role({ name: 'coach' }).save(),
+            new Role({ name: 'trainer' }).save(),
             new Role({ name: 'doctor' }).save()
         ]);
 
@@ -83,9 +83,9 @@ const createDates = async() => {
 
         ]
 
-        timeTable.forEach(async(appointment) => {
-            const newData = await new Appointment(appointment)
-            await newData.save();
+        timeTable.forEach((appointment) => {
+            const newData =  new Appointment(appointment)
+            newData.save();
         })
         
     }

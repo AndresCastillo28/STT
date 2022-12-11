@@ -18,13 +18,17 @@ const registerUser =  async(req, res) => {
             password
         }
 
-        const client = new Client(data);
+        const user = new Client(data);
 
-        await client.save();
+        await user.save();
+
+        const token = await generateJWT(user._id, user.name);
 
         return res.status(201).json({
             ok: true,
-            client,
+            uid: user.id,
+            name: user.name,
+            token,
             msg: 'Usuario creado'
         })
 
@@ -80,15 +84,25 @@ const loginClient = async( req, res ) => {
 
 const revalidarToken = async (req, res = response) => {
 
-    const { uid, name } = req;
+    try {
+        const { uid, name } = req;
+    
+        // generar un nuevo JWT y retornarlo en esta petición
+        const token = await generateJWT( uid, name );
+    
+        return res.json({
+            ok: true,
+            token
+        })
+        
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({
+            ok: false,
+            mgs: 'Por favor hable con el administrador'
+        })
+    }
 
-    // generar un nuevo JWT y retornarlo en esta petición
-    const token = await generarJWT( uid, name );
-
-    res.json({
-        ok: true,
-        token
-    })
 };
 
 module.exports = {
