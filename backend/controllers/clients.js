@@ -1,4 +1,5 @@
 const Appointment = require('../models/Appointment');
+const { findByIdAndUpdate } = require('../models/Client');
 const Client = require('../models/Client');
 const Trainer = require('../models/Trainer');
 
@@ -92,8 +93,42 @@ const getTrainer = async(req, res) => {
     }
 }
 
+const contratarEntrenador = async(req, res) => {
+    const id = req.uid
+    const user = await Client.findById(id)
+
+    if( user.trainer !== null ) {
+        return res.json({
+            trainer: user.trainer
+        })
+    }
+
+    const trainerId = req.params.id
+
+    if(!trainerId) {
+        return res.status(500).json({
+            ok: false,
+            msg: 'No hay un id de entrenador'
+        })
+    }
+
+    const findTrainer = await Trainer.findById(trainerId).select('_id')
+    console.log(findTrainer)
+
+    const newUser = { id, name: user.name }
+
+    await Client.findByIdAndUpdate(id, { trainer: findTrainer })
+    
+    await Trainer.findByIdAndUpdate(trainerId, { $push: { clients: newUser } })
+
+    return res.json({
+        ok: true
+    })
+}
+
 const updateTrainer = async (req, res) => {
 
+    
     try {
         const trainer = req.params.id
         const user = req.uid
@@ -152,5 +187,6 @@ module.exports = {
     updateAppointment,
     updateTrainer,
     getTrainer,
-    updatePay
+    updatePay,
+    contratarEntrenador
 }

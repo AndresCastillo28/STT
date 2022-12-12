@@ -10,3 +10,5 @@ export * from './components/Stripe'
 export * from './pages/Dashboard'
 export * from './pages/Doctors'
 export * from './pages/Trainers'
+export * from './pages/Rutinas'
+

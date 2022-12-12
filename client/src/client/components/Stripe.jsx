@@ -47,6 +47,8 @@ const CheckoutForm = () => {
 
         }
     }
+    
+    
     return (
         <form onSubmit={handleSubmit}>
             <div className="container text-dark">
@@ -56,10 +58,10 @@ const CheckoutForm = () => {
             <CardElement className='form-control mt-4' />
             <div className="d-flex justify-content-center">
 
-                <button className='btn btn-success btn-lg mt-4' disabled={!stripe}>
+                <button className='btn btn-success btn-lg mt-4' disabled={!stripe} data-bs-dismiss="modal">
                     {loading ? (<div class="spinner-border text-light" role="status">
                         <span class="visually-hidden">Loading...</span>
-                    </div>) : ("Buy")}
+                    </div>) : ("Comprar") }
                 </button>
             </div>
         </form>

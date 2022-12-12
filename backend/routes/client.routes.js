@@ -1,5 +1,5 @@
 const express = require('express');
-const { getScheduleDate, getTrainers, updateAppointment, updateTrainer, getTrainer, updatePay } = require('../controllers/clients');
+const { getScheduleDate, getTrainers, updateAppointment, updateTrainer, getTrainer, updatePay, contratarEntrenador } = require('../controllers/clients');
 const { validatJWT } = require('../middlewares/validate-jwt');
 
 const router = express.Router();
@@ -12,6 +12,7 @@ router.get('/trainer', getTrainer)
 router.put('/:id', updateAppointment)
 router.put('/trainer/:id', updateTrainer)
 router.post('/pay', updatePay)
+router.put('/contratar/:id', contratarEntrenador)
 
 
 module.exports = router;

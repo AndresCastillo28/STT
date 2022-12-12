@@ -1,2 +1,5 @@
 export * from './components/Navbar'
+export * from './components/Home'
+export * from './components/ViewClients'
 export * from './pages/DashboardTrainer'
+export * from './pages/Clientes'

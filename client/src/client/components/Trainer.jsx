@@ -1,10 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../hooks';
 
 export const Trainer = () => {
 
     const { user } = useAuthStore();
-    console.log(user.trainer)
     const { trainer } = user
 
     return (
@@ -20,7 +20,9 @@ export const Trainer = () => {
                     </div>
                 </div>
                 <div className="col d-flex justify-content-center">
-                    <button className='btn btn-danger fs-1 fw-bold p-5 border-5'>Ver mi rutina</button>
+                    <Link to='/rutina'>
+                        <button className='btn btn-danger fs-1 '> Ver mi rutina </button>
+                    </Link >
                 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Home } from '../home';
-import { Dashboard, Doctors, Trainers } from '../client';
+import { Home, Tutorial} from '../home';
+import { Dashboard, Doctors, Rutinas, Trainers } from '../client';
 import { DashboardTrainer } from '../trainer';
 
 import { useAuthStore } from '../hooks';
+import { Clientes } from '../trainer/';
 
 
 export const AppRouter = () => {
@@ -32,6 +33,7 @@ export const AppRouter = () => {
                 <>
 
                     <Route path="/*" element={<Home />} />
+                    <Route path="/tutorial" element={<Tutorial />} />
                 </>
             </Routes>
         )
@@ -42,6 +44,7 @@ export const AppRouter = () => {
             return(
                 <Routes>
                     <Route path='/*' element={ <DashboardTrainer/> } />
+                    <Route path='/clientes' element={ <Clientes/> } />
                 </Routes>
             )
         }else if (user.rol === 'client'){
@@ -49,6 +52,7 @@ export const AppRouter = () => {
                 <Routes>
                     <Route path='/' element={ <Dashboard /> }/>
                     <Route path='/doctors' element={ <Doctors /> }/>
+                    <Route path='/rutina' element={ <Rutinas /> } />
                     <Route path='/trainers' element={ <Trainers /> }/>
                     <Route path='/*' element={ <Navigate to="/" /> } />
 

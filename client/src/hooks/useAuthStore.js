@@ -13,6 +13,7 @@ export const useAuthStore = () => {
 
         try {
             const { data } = await sttApi.post('/auth/login', { email, password });
+            console.log(data.rol)
             localStorage.setItem('token', data.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
             dispatch(onLogin({ name: data.name, uid: data.uid, pago: data.pago, trainer: data.trainer, rol: data.rol }));

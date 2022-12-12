@@ -1,14 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-const ClientSchema = Schema({
+const UserSchema = Schema({
     name: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: true
-    },
+    
     email: {
         type: String,
         required: true
@@ -30,14 +27,13 @@ const ClientSchema = Schema({
     },
     trainer: {
         type: Schema.Types.ObjectId,
-        ref: 'Trainer',
-        default: null
+        ref: 'Trainer'
     },
     rol: {
         type: String,
         default: 'client'
     },
-    rutina: {
+    clients: {
         type: Array
     }
 });

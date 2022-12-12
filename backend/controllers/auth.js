@@ -40,13 +40,31 @@ const registerUser =  async(req, res) => {
 const loginClient = async( req, res ) => {
     const { email, password } = req.body;
 
+    const user = await Client.findOne({email});
     try {
-        const user = await Client.findOne({email});
-
+      
+        console.log(user)
         if( !user ) {
-            return res.status(400).json({
-                ok: false,
-                msg: 'El usuario no existe'
+            const trainer = await Trainer.findOne({ email });
+
+            const validPassword =  bcrypt.compareSync( password, trainer.password );
+
+            if ( !validPassword ) {
+                return res.status(400).json({
+                    ok: false,
+                    msg: 'Contraseña incorrecta'
+                })
+            }
+
+            const token = await generateJWT(trainer._id, trainer.name);
+
+            return res.json({
+                ok: true,
+                msg: 'Usuario logueado',
+                uid: trainer._id,
+                name: trainer.name,
+                rol: trainer.rol,
+                token
             })
         }
 

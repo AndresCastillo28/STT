@@ -7,6 +7,12 @@ const TrainerSchema = Schema({
     name: {
         type: String
     },
+    email: {
+        type: String
+    },
+    password: {
+        type: String
+    },
     price: {
         type: Number
     },
@@ -14,7 +20,10 @@ const TrainerSchema = Schema({
         type: String
     },
     clients: {
-        type: Object
+        type: Array
+    },
+    rol: {
+        type: String
     }
 
 });
